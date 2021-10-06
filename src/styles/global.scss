@@ -4,3 +4,22 @@
     box-sizing: border-box;
 }
 
+@media (max-width: 1080px) {
+    html {
+        font-size: 93.75%;
+    }
+}
+
+@media (max-width: 720px) {
+    html {
+        font-size: 87.5%;
+    }
+}
+
+body, input, button, select {
+    font: 400 1rem "Poppins", sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
