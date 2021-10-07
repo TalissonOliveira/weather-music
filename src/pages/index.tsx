@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Music Climate</title>
+        <title>Weather Music</title>
       </Head>
       <Header />
       <Dashboard />
