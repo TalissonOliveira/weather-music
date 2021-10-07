@@ -9,6 +9,7 @@ export default function Home() {
         <title>Music Climate</title>
       </Head>
       <Header />
+      <Dashboard />
     </>
   )
 }

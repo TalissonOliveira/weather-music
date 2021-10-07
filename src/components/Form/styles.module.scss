@@ -1,0 +1,39 @@
+.form {
+    margin-top: -65px;
+
+    input {
+        background: #ffffff;
+        width: 10rem;
+        height: 3rem;
+        padding-left: 0.7rem;
+        margin-right: 1rem;
+
+        border: none;
+        border-radius: 0.3rem;
+
+        font-size: 1rem;
+        font-weight: 400;
+
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+
+        &::placeholder {
+            color: #b6b7bb
+        }
+    }
+
+    button {
+        background: #991ff0;
+        color: white;
+        width: 5rem;
+        height: 3rem;
+
+        border: none;
+        border-radius: 0.3rem;
+
+        transition: filter .2s;
+
+        &:hover {
+            filter: brightness(.9);
+        }
+    }
+}
