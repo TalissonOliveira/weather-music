@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
 
 import styles from './styles.module.scss'
 
@@ -11,26 +11,23 @@ interface ResponseData {
     name: string
 }
 
-export function Form() {
-    const [weather, setWeather] = useState<ResponseData>()
+export function Form({ setWeather }) {
+    const [city, setCity] = useState('')
+    const [latitude, setLatitude] = useState(0)
+    const [longitude, setLongitude] = useState(0)
 
-    useEffect(() => {
-        console.log(process.env.NEXT_PUBLIC_API_KEY)
+    function handleForm (event: FormEvent) {
+        event.preventDefault()
+
         api.get<ResponseData>('weather', {
             params: {
-                q: 'Londres',
+                q: city,
                 units: 'metric',
                 appid: process.env.NEXT_PUBLIC_API_KEY
             }
         })
             .then(response => setWeather(response.data))
-    }, [])
-
-    useEffect(() => {
-        if (weather !== undefined) {
-            console.log(weather.main)
-        }
-    }, [weather])
+    }
 
     return (
         <form className={styles.form}>
@@ -39,6 +36,7 @@ export function Form() {
                 name="city"
                 id="city"
                 placeholder="Cidade"
+                onChange={(event) => setCity(event.target.value)}
             />
             <input
                 type="text"
@@ -53,7 +51,7 @@ export function Form() {
                 placeholder="Longitude"
             />
 
-            <button type="submit">Buscar</button>
+            <button onClick={handleForm}>Buscar</button>
         </form>
     )
 }
