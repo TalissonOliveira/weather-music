@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { Dashboard } from "../components/Dashboard";
+import { Header } from "../components/Header";
 
 export default function Home() {
   return (
@@ -6,7 +8,7 @@ export default function Home() {
       <Head>
         <title>Music Climate</title>
       </Head>
-      <h1>Hello Wolrd</h1>
+      <Header />
     </>
   )
 }
