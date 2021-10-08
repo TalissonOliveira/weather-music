@@ -1,0 +1,37 @@
+.button {
+    background: transparent;
+    position: relative;
+    display: inline-block;
+    color: #363F5F;
+
+    border: none;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: filter .4s;
+
+    &::after {
+        content: '';
+        background-color: #363F5F;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        
+        width: 0%;
+        height: 2px;
+
+        transition: width .3s;
+      }
+
+    &:hover {
+        &::after {
+            content: '';
+            width: 100%;
+        }
+
+        filter: brightness(.4);
+    }
+}
