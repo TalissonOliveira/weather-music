@@ -21,12 +21,21 @@
         margin-left: .8rem;
         line-height: 1.3rem;
 
-        p {
+        a {
+            display: block;
             color: #363F5F;
+
+            text-decoration: none;
             font-size: 1.01rem;
+
+            transition: opacity .3s;
+
+            &:hover {
+                opacity: .8;
+            }
         }
 
-        span {
+        a + a {
             color: #969CB2;
             font-size: .9rem;
         }
