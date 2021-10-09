@@ -4,16 +4,16 @@ import { Artists, ImageAlbum } from '../../interfaces/interfaces'
 import styles from './styles.module.scss'
 
 interface PlaylistTrackProps {
-    album?: {
+    album: {
         images: ImageAlbum[]
     }
-    artists?: Artists[]
-    explicit?: boolean
-    external_urls?: {
+    artists: Artists[]
+    explicit: boolean
+    external_urls: {
         spotify: string
     }
     name: string
-    preview_url?: string | null
+    preview_url: string | null
 }
 
 export function PlaylistTrack({

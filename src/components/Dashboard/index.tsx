@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styles from './styles.module.scss'
 
 import { Form } from "../Form"
+import { SavePlaylistButton } from '../SavePlaylistButton'
+import { ShowTracks } from '../ShowTracks'
 
-interface ResponseData {
+export interface WeatherInfos {
     main: {
         temp: number
     }
@@ -11,17 +13,13 @@ interface ResponseData {
 }
 
 export function Dashboard() {
-    const [weather, setWeather] = useState<ResponseData>()
-
-    useEffect(() => {
-        if (weather !== undefined) {
-            console.log(weather)
-        }
-    }, [weather])
+    const [weather, setWeather] = useState<WeatherInfos>()
 
     return (
         <div className={styles.container}>
             <Form setWeather={setWeather} />
+            <SavePlaylistButton />
+            <ShowTracks weather={weather} />
         </div>
     )
 }

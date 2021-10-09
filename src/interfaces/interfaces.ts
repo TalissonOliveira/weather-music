@@ -1,10 +1,3 @@
-export interface ResponseData {
-    main: {
-        temp: number
-    }
-    name: string
-}
-
 export interface ResponseToken {
     access_token: string
 }
