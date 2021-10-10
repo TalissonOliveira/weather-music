@@ -32,6 +32,7 @@ export const TrackProvider = ({ children }) => {
     const [category, setCategory] = useState('')
 
     useEffect(() => {
+        localStorage.setItem('playlists', '[]')
         function getPlaylistsFromLocalStorage() {
             const parsedPlaylists = JSON.parse(localStorage.getItem('playlists'))
             setPlaylists(parsedPlaylists?.reverse())
