@@ -27,7 +27,7 @@ export function ShowPlaylists() {
 
     return (
         <div className={styles['playlists-container']}>
-        {playlists.length > 0 ? 
+        {playlists?.length > 0 ? 
             playlists?.map((playlist, index) => {
                 return (
                     <div key={''} className={styles['playlist']}>

@@ -92,7 +92,7 @@ export function ShowTracks() {
 
     return (
         <div>
-        {tracks.length !== 0 ?
+        {tracks?.length !== 0 ?
             tracks.map(({ track }) => {
                 return (
                     <PlaylistTrack
