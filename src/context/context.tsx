@@ -34,7 +34,7 @@ export const TrackProvider = ({ children }) => {
     useEffect(() => {
         function getPlaylistsFromLocalStorage() {
             const parsedPlaylists = JSON.parse(localStorage.getItem('playlists'))
-            setPlaylists(parsedPlaylists.reverse())
+            setPlaylists(parsedPlaylists?.reverse())
         }
         getPlaylistsFromLocalStorage()
     }, [])
@@ -43,7 +43,7 @@ export const TrackProvider = ({ children }) => {
         if (typeof window !== 'undefined') {
             const playlist = JSON.parse(localStorage.getItem('playlists'))
             if (playlist !== null ) {
-                return playlist.reverse()
+                return playlist?.reverse()
             }
             return []
         }

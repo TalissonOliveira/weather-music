@@ -12,7 +12,7 @@ export function ShowPlaylists() {
     useEffect(() => {
         function getPlaylistsLocalStorage() {
             const parsedPlaylists = JSON.parse(localStorage.getItem('playlists'))
-            setPlaylists(parsedPlaylists.reverse())
+            setPlaylists(parsedPlaylists?.reverse())
         }
         getPlaylistsLocalStorage()
     // eslint-disable-next-line react-hooks/exhaustive-deps
