@@ -1,0 +1,44 @@
+.playlists-container {
+    max-width: 890px;
+    margin: 0 auto;
+    padding: 2.5rem 1rem;
+    
+    p {
+        color: #989fa6;
+        text-align: center;
+    }
+
+    .playlist {
+        & + .playlist {
+            margin-top: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .title {
+            color: #414142;
+            font-size: 1.5rem;
+        }
+    
+        .date {
+            color: #757985;
+            font-size: 1rem;
+        }
+
+        .delete {
+            color: #ec0e0e;
+            cursor: pointer;
+            font-weight: 600;
+
+            transition: filter .2s;
+
+            &:hover {
+                filter: brightness(.9);
+                text-decoration: underline;
+            }
+        }
+    }
+}

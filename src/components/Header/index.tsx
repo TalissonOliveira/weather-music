@@ -1,10 +1,10 @@
 import styles from './styles.module.scss'
 
-export function Header() {
+export function Header({ children }) {
     return (
-        <header className={styles.headerContainer} >
+        <header className={styles.headerContainer}>
             <div className={styles.headerContent}>
-                <h1>Encontre a playlist <br/>ideal para o clima do seu dia! :)</h1>
+                {children}
             </div>
         </header>
     )

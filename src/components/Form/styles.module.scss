@@ -22,6 +22,11 @@
         &::placeholder {
             color: #b6b7bb
         }
+
+        &:disabled {
+            background: #ECECEC;
+            cursor: not-allowed;
+        }
     }
 
     button {

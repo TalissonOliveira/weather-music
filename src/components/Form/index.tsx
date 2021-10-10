@@ -1,8 +1,11 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useContext, useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 import styles from './styles.module.scss'
 
-import { api } from '../../services/api'
+import { apiWeather } from '../../services/api'
+import { Context } from '../../context/context'
 
 interface ResponseData {
     main: {
@@ -11,15 +14,28 @@ interface ResponseData {
     name: string
 }
 
-export function Form({ setWeather }) {
+export function Form() {
     const [city, setCity] = useState('')
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
+    const { setWeather } = useContext(Context)
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                setLatitude(position.coords.latitude)
+                setLongitude(position.coords.longitude)
+            })
+        }
+    }, [])
 
     function handleForm (event: FormEvent) {
         event.preventDefault()
+        if (!city) {
+            return toast.error('Nome da cidade inválido!')
+        }
 
-        api.get<ResponseData>('weather', {
+        apiWeather.get<ResponseData>('weather', {
             params: {
                 q: city,
                 units: 'metric',
@@ -27,6 +43,10 @@ export function Form({ setWeather }) {
             }
         })
             .then(response => setWeather(response.data))
+            .catch(error => {
+                console.log(error)
+                toast.error('Nome da cidade inválido!')
+            })
     }
 
     return (
@@ -43,15 +63,22 @@ export function Form({ setWeather }) {
                 name="lat"
                 id="lat"
                 placeholder="Latitude"
+                value={latitude !== 0 ? latitude : ''}
+                onChange={(event) => setLatitude(Number(event.target.value))}
+                disabled
             />
             <input
                 type="text"
                 name="lon"
                 id="lon"
                 placeholder="Longitude"
+                value={longitude !== 0 ? longitude : ''}
+                onChange={(event) => setLongitude(Number(event.target.value))}
+                disabled
             />
 
             <button onClick={handleForm}>Buscar</button>
+            <ToastContainer />
         </form>
     )
 }

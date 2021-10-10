@@ -1,25 +1,27 @@
-import { useState } from 'react'
+import { useContext } from 'react'
+
 import styles from './styles.module.scss'
 
 import { Form } from "../Form"
 import { SavePlaylistButton } from '../SavePlaylistButton'
 import { ShowTracks } from '../ShowTracks'
-
-export interface WeatherInfos {
-    main: {
-        temp: number
-    }
-    name: string
-}
+import { Context } from '../../context/context'
+import { formatCategory } from '../../scripts/formatCategory'
 
 export function Dashboard() {
-    const [weather, setWeather] = useState<WeatherInfos>()
+    const { category, tracks } = useContext(Context)
 
     return (
-        <div className={styles.container}>
-            <Form setWeather={setWeather} />
-            <SavePlaylistButton />
-            <ShowTracks weather={weather} />
+        <div className={styles['container']}>
+            <Form />
+            {
+                tracks.length > 0 &&
+                <div className={styles['options']}>
+                    <p>Playlist com músicas da categoria {formatCategory(category)}</p>
+                    <SavePlaylistButton />
+                </div>
+            }
+            <ShowTracks />
         </div>
     )
 }

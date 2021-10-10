@@ -1,26 +1,22 @@
 import { PlaylistTrack } from '../PlaylistTrack/index'
-import { Track, ResponseToken, ResponsePlaylist } from '../../interfaces/interfaces'
-import { useEffect, useState } from 'react'
+import { ResponsePlaylistTrack, ResponseToken, ResponsePlaylist } from '../../interfaces/interfaces'
+import { useContext, useEffect, useState } from 'react'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { S_IFDIR } from 'constants'
+import { Context } from '../../context/context'
+import { apiSpotify } from '../../services/api'
 
-interface ShowTracksProps {
-    weather: {
-        main: {
-            temp: number
-        }
-        name: string
-    }
-}
-
-interface ResponsePlaylistTrack {
-    items: Track[]
-}
-
-export function ShowTracks({ weather }: ShowTracksProps) {
+export function ShowTracks() {
     const [token, setToken] = useState('')
-    const [tracks, setTracks] = useState<Track[]>([])
-    const [category, setCategory] = useState('')
+    const { weather, tracks, setTracks, setPlaylist, setPlaylists, setCategory, category } = useContext(Context)
+
+    useEffect(() => {
+        function getPlaylistsFromLocalStorage() {
+            const parsedPlaylists = JSON.parse(localStorage.getItem('playlists'))
+            setPlaylists(parsedPlaylists)
+        }
+        getPlaylistsFromLocalStorage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     // Obter token spotify
     useEffect(() => {
@@ -36,9 +32,9 @@ export function ShowTracks({ weather }: ShowTracksProps) {
             .then((responseToken: AxiosResponse<ResponseToken>) => setToken(responseToken.data.access_token))
     }, [])
 
-    // Definir categoria
     useEffect(() => {
-        if (weather !== undefined) {
+        console.log(weather)
+        if (weather) {
             if (weather.main.temp >= 32) {
                 setCategory('rock')
             } else if (weather.main.temp < 32 && weather.main.temp >= 24) {
@@ -49,6 +45,7 @@ export function ShowTracks({ weather }: ShowTracksProps) {
                 setCategory('focus')
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [weather])
 
     // Buscar playlist
@@ -62,14 +59,16 @@ export function ShowTracks({ weather }: ShowTracksProps) {
             }
 
             try {
-                const responsePlaylists: AxiosResponse<ResponsePlaylist> = await axios(
-                    `https://api.spotify.com/v1/browse/categories/${category}/playlists`, headerOptions
+                const responsePlaylists: AxiosResponse<ResponsePlaylist> = await apiSpotify(
+                    `browse/categories/${category}/playlists`, headerOptions
                 )
 
-                const responsePlaylistTracks: AxiosResponse<ResponsePlaylistTrack> = await axios(
-                    `https://api.spotify.com/v1/playlists/${responsePlaylists.data.playlists.items[0].id}/tracks?limit=20`, headerOptions
+                const responsePlaylistTracks: AxiosResponse<ResponsePlaylistTrack> = await apiSpotify(
+                    `playlists/${responsePlaylists.data.playlists.items[0].id}/tracks?limit=20`, headerOptions
                 )
+
                 setTracks(responsePlaylistTracks.data.items)
+                
                 console.log(responsePlaylistTracks.data.items)
             } catch (error) {
                 console.log(error)
@@ -79,9 +78,21 @@ export function ShowTracks({ weather }: ShowTracksProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [category])
 
+    useEffect(() => {
+        const newPlaylist = {
+            tracks,
+            date: new Date(),
+            temperature: weather?.main.temp,
+            category: category,
+            city: weather?.name
+        }
+        setPlaylist(newPlaylist)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [tracks])
+
     return (
         <div>
-        {
+        {tracks.length !== 0 ?
             tracks.map(({ track }) => {
                 return (
                     <PlaylistTrack
@@ -95,6 +106,8 @@ export function ShowTracks({ weather }: ShowTracksProps) {
                     />
                 )
             })
+            :
+            <p>Nada por enquanto.<br/>Escolha uma cidade para começar!</p>
         }
         </div>
     )

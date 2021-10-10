@@ -1,20 +1,7 @@
 import Image from 'next/image'
-import { Artists, ImageAlbum } from '../../interfaces/interfaces'
+import { Playlist } from '../../interfaces/interfaces'
 
 import styles from './styles.module.scss'
-
-interface PlaylistTrackProps {
-    album: {
-        images: ImageAlbum[]
-    }
-    artists: Artists[]
-    explicit: boolean
-    external_urls: {
-        spotify: string
-    }
-    name: string
-    preview_url: string | null
-}
 
 export function PlaylistTrack({
     name,
@@ -23,7 +10,7 @@ export function PlaylistTrack({
     album,
     preview_url,
     external_urls
-    }: PlaylistTrackProps) {
+    }: Playlist) {
    
     return (
         <div className={styles['track-container']}>
@@ -34,8 +21,18 @@ export function PlaylistTrack({
                 alt=''
             />
             <div className={styles['track-info']}>
-                <a href={external_urls.spotify}>{name}</a>
-                <a href={artists[0].external_urls.spotify}>{artists[0].name}</a>
+                <a href={external_urls.spotify}
+                    rel="noreferrer"
+                    target="_blank"
+                >
+                    {name}
+                </a>
+                <a href={artists[0].external_urls.spotify}
+                    rel="noreferrer"
+                    target="_blank"
+                >
+                    {artists[0].name}
+                </a>
             </div>
         </div>
     )

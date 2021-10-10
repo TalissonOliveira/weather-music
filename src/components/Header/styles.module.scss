@@ -6,6 +6,8 @@
 }
 
 .headerContent {
+    display: flex;
+    justify-content: space-between;
     margin: 0 auto;
     max-width: 890px;
     padding: 0 1rem;
@@ -13,5 +15,39 @@
     h1 {
         color: white;
         font-size: 1.5rem;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+
+        background: #6933FF;
+        color: white;
+        padding: .5rem;
+        height: 2.5rem;
+
+        border: none;
+        border-radius: 0.3rem;
+
+        transition: filter .2s;
+
+        &[href='/playlists'] {
+            background: transparent;
+            padding: 0;
+            text-decoration: underline;
+        }
+
+        &:hover {
+            filter: brightness(.9);
+        }
+    }
+
+    div {
+        color: white;
+        text-align: right;
+
+        p {
+            font-size: 1.2rem;
+        }
     }
 }
