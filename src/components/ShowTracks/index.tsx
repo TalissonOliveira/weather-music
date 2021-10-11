@@ -9,15 +9,6 @@ export function ShowTracks() {
     const [token, setToken] = useState('')
     const { weather, tracks, setTracks, setPlaylist, setPlaylists, setCategory, category } = useContext(Context)
 
-    useEffect(() => {
-        function getPlaylistsFromLocalStorage() {
-            const parsedPlaylists = JSON.parse(localStorage.getItem('playlists'))
-            setPlaylists(parsedPlaylists)
-        }
-        getPlaylistsFromLocalStorage()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     // Obter token spotify
     useEffect(() => {
         const authorizationHeadersOptions: AxiosRequestConfig = {

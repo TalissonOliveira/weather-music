@@ -7,7 +7,8 @@ export function SavePlaylistButton() {
 
     useEffect(() => {
         function addPlaylistsToLocalStorage() {
-            localStorage.setItem('playlists', JSON.stringify(playlists))
+            const reversedPlaylists = playlists.reverse()
+            localStorage.setItem('playlists', JSON.stringify(reversedPlaylists))
         }
         addPlaylistsToLocalStorage()
     }, [playlists])

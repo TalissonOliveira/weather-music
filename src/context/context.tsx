@@ -26,29 +26,16 @@ export const Context = createContext<ContextValue | undefined>(void 0)
 
 export const TrackProvider = ({ children }) => {
     const [weather, setWeather] = useState<WeatherInfos>()
-    const [playlists, setPlaylists] = useState<Playlist[]>(testNullLocalStorage())
+    const [playlists, setPlaylists] = useState<Playlist[]>([])
     const [tracks, setTracks] = useState<TrackProps[]>([])
     const [playlist, setPlaylist] = useState<Playlist>()
     const [category, setCategory] = useState('')
 
     useEffect(() => {
-        localStorage.setItem('playlists', '[]')
-        function getPlaylistsFromLocalStorage() {
-            const parsedPlaylists = JSON.parse(localStorage.getItem('playlists'))
-            setPlaylists(parsedPlaylists?.reverse())
-        }
-        getPlaylistsFromLocalStorage()
+        const parsedPlaylists = JSON.parse(localStorage.getItem('playlists'))
+        if (!parsedPlaylists) return
+        setPlaylists(parsedPlaylists?.reverse())
     }, [])
-
-    function testNullLocalStorage() {
-        if (typeof window !== 'undefined') {
-            const playlist = JSON.parse(localStorage.getItem('playlists'))
-            if (playlist !== null ) {
-                return playlist?.reverse()
-            }
-            return []
-        }
-    }
 
     return (
         <Context.Provider value={{
