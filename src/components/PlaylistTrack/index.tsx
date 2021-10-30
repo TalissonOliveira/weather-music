@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Playlist } from '../../interfaces/interfaces'
+import { PlaylistTrackProps } from '../../interfaces/interfaces'
 
 import styles from './styles.module.scss'
 
@@ -10,7 +10,7 @@ export function PlaylistTrack({
     album,
     preview_url,
     external_urls
-    }: Playlist) {
+    }: PlaylistTrackProps) {
    
     return (
         <div className={styles['track-container']}>

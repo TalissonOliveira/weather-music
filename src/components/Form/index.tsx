@@ -18,7 +18,7 @@ export function Form() {
     const [city, setCity] = useState('')
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
-    const { setWeather } = useContext(Context)
+    const { weather, setWeather, setCategory } = useContext(Context)
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -28,6 +28,21 @@ export function Form() {
             })
         }
     }, [])
+
+    useEffect(() => {
+        if (weather) {
+            if (weather.main.temp >= 32) {
+                setCategory('rock')
+            } else if (weather.main.temp < 32 && weather.main.temp >= 24) {
+                setCategory('pop')
+            } else if (weather.main.temp < 24 && weather.main.temp >= 16) {
+                setCategory('classical')
+            } else {
+                setCategory('focus')
+            }
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [weather])
 
     function handleForm (event: FormEvent) {
         event.preventDefault()

@@ -20,7 +20,7 @@ export interface ResponsePlaylist {
 }
 
 export interface ResponsePlaylistTrack {
-    items: Playlist[]
+    items: PlaylistTrackProps[]
 }
 
 export interface ImageAlbum {
@@ -48,7 +48,7 @@ export interface Artists {
     external_urls: ExternalUrls
 }
 
-export interface Playlist {
+export interface PlaylistTrackProps {
     album: Album
     artists: Artists
     explicit: boolean
@@ -57,6 +57,14 @@ export interface Playlist {
     preview_url: string | null
 }
 
+export interface Playlist {
+    tracks: TrackProps[]
+    date: Date
+    category: string
+    temperature: WeatherInfos,
+    city: String
+}
+
 export interface TrackProps {
-    track: Playlist
+    track: PlaylistTrackProps
 }

@@ -1,13 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
-import { WeatherInfos, TrackProps } from '../interfaces/interfaces'
-
-interface Playlist {
-    tracks: TrackProps[]
-    date: Date
-    category: string
-    temperature: WeatherInfos,
-    city: String
-}
+import { WeatherInfos, TrackProps, Playlist } from '../interfaces/interfaces'
 
 interface ContextValue {
     playlists: Playlist[]

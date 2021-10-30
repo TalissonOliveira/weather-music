@@ -1,8 +1,7 @@
 import { useContext } from "react"
 import { Context } from "../../context/context"
 import { PlaylistTrack } from "../PlaylistTrack"
-
-import { formatCategory } from '../../scripts/formatCategory'
+import { PlaylistInfo } from "../PlaylistInfo"
 import { toast, ToastContainer } from "react-toastify"
 
 import styles from './styles.module.scss'
@@ -23,18 +22,12 @@ export function ShowPlaylists() {
         {playlists?.length > 0 ? 
             playlists?.map((playlist, index) => {
                 return (
-                    <div key={''} className={styles['playlist']}>
-                        <div className={styles['header']}>
-                            <div>
-                                <p className={styles['title']}>Playlist da categoria {formatCategory(playlist.category)}</p>
-                                <p className={styles['date']}>
-                                    Salva em {Intl.DateTimeFormat('pt-br').format(new Date(playlist.date))}
-                                    {' '}
-                                    com a temperatura de {playlist.temperature}° em {playlist.city}
-                                </p>
-                            </div>
-                            <span className={styles['delete']} onClick={() => handleDeletePlaylist(index)}>Excluir</span>
-                        </div>
+                    <div key={index} className={styles['playlist']}>
+                        <PlaylistInfo
+                            playlist={playlist}
+                            index={index}
+                            handleDeletePlaylist={handleDeletePlaylist}
+                        />
                         {
                             playlist?.tracks.map(({track}) => {
                                 return (
@@ -54,7 +47,7 @@ export function ShowPlaylists() {
                 )
             })
             :
-            <p>Nada por aqui.<br/>Salve uma playlist primeiro</p>
+            <p className={styles['no-playlist']}>Nada por aqui.<br/>Salve uma playlist primeiro</p>
         }
         <ToastContainer autoClose={2000} />
         </div>

@@ -7,7 +7,7 @@ import { apiSpotify } from '../../services/api'
 
 export function ShowTracks() {
     const [token, setToken] = useState('')
-    const { weather, tracks, setTracks, setPlaylist, setPlaylists, setCategory, category } = useContext(Context)
+    const { weather, tracks, setTracks, setPlaylist, category } = useContext(Context)
 
     // Obter token spotify
     useEffect(() => {
@@ -23,21 +23,6 @@ export function ShowTracks() {
             .then((responseToken: AxiosResponse<ResponseToken>) => setToken(responseToken.data.access_token))
             .catch(error => console.log(error))
     }, [])
-
-    useEffect(() => {
-        if (weather) {
-            if (weather.main.temp >= 32) {
-                setCategory('rock')
-            } else if (weather.main.temp < 32 && weather.main.temp >= 24) {
-                setCategory('pop')
-            } else if (weather.main.temp < 24 && weather.main.temp >= 16) {
-                setCategory('classical')
-            } else {
-                setCategory('focus')
-            }
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [weather])
 
     // Buscar playlist
     useEffect(() => {
