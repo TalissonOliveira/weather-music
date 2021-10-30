@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify'
 
 export default function Home() {
   const { weather } = useContext(Context)
-  console.log(weather)
+
   return (
     <>
       <Head>

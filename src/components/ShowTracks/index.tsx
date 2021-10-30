@@ -25,7 +25,6 @@ export function ShowTracks() {
     }, [])
 
     useEffect(() => {
-        console.log(weather)
         if (weather) {
             if (weather.main.temp >= 32) {
                 setCategory('rock')
@@ -60,12 +59,11 @@ export function ShowTracks() {
                 )
 
                 setTracks(responsePlaylistTracks.data.items)
-                
-                console.log(responsePlaylistTracks.data.items)
             } catch (error) {
                 console.log(error)
             }
         }
+
         if (category) {
             RequestApiSpotify()
         }
