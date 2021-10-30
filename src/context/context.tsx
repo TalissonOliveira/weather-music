@@ -24,7 +24,7 @@ interface ContextValue {
 
 export const Context = createContext<ContextValue | undefined>(void 0)
 
-export const TrackProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {
     const [weather, setWeather] = useState<WeatherInfos>()
     const [playlists, setPlaylists] = useState<Playlist[]>([])
     const [tracks, setTracks] = useState<TrackProps[]>([])

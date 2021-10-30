@@ -1,13 +1,13 @@
 import { AppProps } from 'next/app'
-import { TrackProvider } from '../context/context'
+import { AppProvider } from '../context/context'
 
 import '../styles/global.scss'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <TrackProvider>
+    <AppProvider>
       <Component {...pageProps} />
-    </TrackProvider>
+    </AppProvider>
   )
 }
 
