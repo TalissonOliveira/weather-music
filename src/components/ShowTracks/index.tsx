@@ -21,6 +21,7 @@ export function ShowTracks() {
         }
         axios('https://accounts.spotify.com/api/token', authorizationHeadersOptions)
             .then((responseToken: AxiosResponse<ResponseToken>) => setToken(responseToken.data.access_token))
+            .catch(error => console.log(error))
     }, [])
 
     useEffect(() => {
@@ -41,7 +42,7 @@ export function ShowTracks() {
 
     // Buscar playlist
     useEffect(() => {
-        async function requests() {
+        async function RequestApiSpotify() {
             const headerOptions: AxiosRequestConfig = {
                 method: 'GET',
                 headers: {
@@ -65,7 +66,9 @@ export function ShowTracks() {
                 console.log(error)
             }
         }
-        requests()
+        if (category) {
+            RequestApiSpotify()
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [category])
 
