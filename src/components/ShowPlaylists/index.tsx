@@ -3,6 +3,7 @@ import { Context } from "../../context/context"
 import { PlaylistTrack } from "../PlaylistTrack"
 
 import { formatCategory } from '../../scripts/formatCategory'
+import { toast, ToastContainer } from "react-toastify"
 
 import styles from './styles.module.scss'
 
@@ -14,6 +15,7 @@ export function ShowPlaylists() {
         const newPlaylists = playlists.filter(playlist => { return playlist !== deletedPlaylists[0]})
         setPlaylists(newPlaylists)
         localStorage.setItem('playlists', JSON.stringify(newPlaylists))
+        toast.success('Playlist excluída!')
     }
 
     return (
@@ -54,6 +56,7 @@ export function ShowPlaylists() {
             :
             <p>Nada por aqui.<br/>Salve uma playlist primeiro</p>
         }
+        <ToastContainer autoClose={2000} />
         </div>
     )
 }

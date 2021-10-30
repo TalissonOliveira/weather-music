@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { Dashboard } from "../components/Dashboard";
 import { Header } from "../components/Header";
 import { Context } from "../context/context";
+import { ToastContainer } from 'react-toastify'
 
 export default function Home() {
   const { weather } = useContext(Context)
@@ -32,6 +33,7 @@ export default function Home() {
             </div>
       </Header>
       <Dashboard />
+      <ToastContainer autoClose={3000}/>
     </>
   )
 }

@@ -1,5 +1,8 @@
 import { useContext, useEffect } from 'react'
 import { Context } from '../../context/context'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
 import styles from './styles.module.scss'
 
 export function SavePlaylistButton() {
@@ -15,6 +18,7 @@ export function SavePlaylistButton() {
 
     async function handleSavePlaylist() {
         setPlaylists([...playlists, playlist])
+        toast.success('Playlist salva com sucesso!')
     }
 
     return (
