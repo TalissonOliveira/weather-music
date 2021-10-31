@@ -26,7 +26,7 @@ export const AppProvider = ({ children }) => {
     useEffect(() => {
         const parsedPlaylists = JSON.parse(localStorage.getItem('playlists'))
         if (!parsedPlaylists) return
-        setPlaylists(parsedPlaylists?.reverse())
+        setPlaylists(parsedPlaylists)
     }, [])
 
     return (

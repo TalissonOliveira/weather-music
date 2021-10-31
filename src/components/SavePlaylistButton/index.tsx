@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { Context } from '../../context/context'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
@@ -6,18 +6,11 @@ import 'react-toastify/dist/ReactToastify.css'
 import styles from './styles.module.scss'
 
 export function SavePlaylistButton() {
-    const { playlists, setPlaylists, playlist } = useContext(Context)
-
-    useEffect(() => {
-        function addPlaylistsToLocalStorage() {
-            const reversedPlaylists = playlists.reverse()
-            localStorage.setItem('playlists', JSON.stringify(reversedPlaylists))
-        }
-        addPlaylistsToLocalStorage()
-    }, [playlists])
+    const { playlists, playlist } = useContext(Context)
 
     async function handleSavePlaylist() {
-        setPlaylists([...playlists, playlist])
+        playlists.unshift(playlist)
+        localStorage.setItem('playlists', JSON.stringify(playlists))
         toast.success('Playlist salva com sucesso!')
     }
 
