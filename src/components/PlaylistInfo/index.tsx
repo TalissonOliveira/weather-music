@@ -1,3 +1,6 @@
+import { useContext } from 'react'
+import { toast } from 'react-toastify'
+import { Context } from '../../context/context'
 import { Playlist } from '../../interfaces/interfaces'
 import { formatCategory } from '../../scripts/formatCategory'
 
@@ -5,11 +8,20 @@ import styles from './styles.module.scss'
 
 interface PlaylistInfoProps {
     playlist: Playlist
-    handleDeletePlaylist: (value: any) => void
     index: number
 }
 
-export function PlaylistInfo({ playlist, handleDeletePlaylist, index }: PlaylistInfoProps) {
+export function PlaylistInfo({ playlist, index }: PlaylistInfoProps) {
+    const { playlists, setPlaylists } = useContext(Context)
+
+    function handleDeletePlaylist(playlistIndex: number) {
+        const deletedPlaylists = playlists.splice(playlistIndex, 1)
+        const newPlaylists = playlists.filter(playlist => { return playlist !== deletedPlaylists[0]})
+        setPlaylists(newPlaylists)
+        localStorage.setItem('playlists', JSON.stringify(newPlaylists))
+        toast.success('Playlist excluída!')
+    }
+
     return (
         <div className={styles['header']}>
             <div>

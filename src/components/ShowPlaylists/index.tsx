@@ -2,20 +2,11 @@ import { useContext } from "react"
 import { Context } from "../../context/context"
 import { PlaylistTrack } from "../PlaylistTrack"
 import { PlaylistInfo } from "../PlaylistInfo"
-import { toast } from "react-toastify"
 
 import styles from './styles.module.scss'
 
 export function ShowPlaylists() {
-    const { playlists, setPlaylists } = useContext(Context)
-
-    function handleDeletePlaylist(index) {
-        const deletedPlaylists = playlists.splice(index, 1)
-        const newPlaylists = playlists.filter(playlist => { return playlist !== deletedPlaylists[0]})
-        setPlaylists(newPlaylists)
-        localStorage.setItem('playlists', JSON.stringify(newPlaylists))
-        toast.success('Playlist excluída!')
-    }
+    const { playlists } = useContext(Context)
 
     return (
         <div className={styles['playlists-container']}>
@@ -26,7 +17,6 @@ export function ShowPlaylists() {
                         <PlaylistInfo
                             playlist={playlist}
                             index={index}
-                            handleDeletePlaylist={handleDeletePlaylist}
                         />
                         {
                             playlist?.tracks.map(({track}) => {
