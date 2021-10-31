@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { Context } from "../../context/context"
 import { PlaylistTrack } from "../PlaylistTrack"
 import { PlaylistInfo } from "../PlaylistInfo"
-import { toast, ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 
 import styles from './styles.module.scss'
 
@@ -49,7 +49,6 @@ export function ShowPlaylists() {
             :
             <p className={styles['no-playlist']}>Nada por aqui.<br/>Salve uma playlist primeiro</p>
         }
-        <ToastContainer autoClose={2000} />
         </div>
     )
 }

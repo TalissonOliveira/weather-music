@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { Header } from '../components/Header';
 import { ShowPlaylists } from '../components/ShowPlaylists'
+import { ToastContainer } from "react-toastify"
 
 export default function Playlists() {
     return (
@@ -16,6 +17,7 @@ export default function Playlists() {
                 </Link>
             </Header>
             <ShowPlaylists />
+            <ToastContainer autoClose={3000}/>
         </>
     )
 }
