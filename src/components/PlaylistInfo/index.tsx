@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { toast } from 'react-toastify'
 import { Context } from '../../context/context'
 import { Playlist } from '../../interfaces/interfaces'
 import { formatCategory } from '../../scripts/formatCategory'
@@ -19,7 +18,6 @@ export function PlaylistInfo({ playlist, index }: PlaylistInfoProps) {
         const newPlaylists = playlists.filter(playlist => { return playlist !== deletedPlaylists[0]})
         setPlaylists(newPlaylists)
         localStorage.setItem('playlists', JSON.stringify(newPlaylists))
-        toast.success('Playlist excluída!')
     }
 
     return (
